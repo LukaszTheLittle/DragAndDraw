@@ -1,6 +1,7 @@
 package com.bignerdranch.android.draganddraw
 
 import android.content.Context
+import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.PointF
 import android.util.AttributeSet
@@ -48,6 +49,15 @@ class BoxDrawingView(context: Context, attrs: AttributeSet? = null) :
         Log.i(TAG, "$action at x=${current.x}, y=${current.y}")
 
         return true
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        // fill the background
+        canvas.drawPaint(backgroundPaint)
+
+        boxen.forEach { box ->
+            canvas.drawRect(box.left, box.top, box.right, box.bottom, boxPaint)
+        }
     }
 
     private fun updateCurrentBox(current: PointF) {
